@@ -50,10 +50,13 @@ let node = svg.append("g")
   .append("circle")
     .attr("r", 8)
     .style("fill", d=> colorScale(d.gender))
+    
     .call(d3.drag()
     .on("start", dragstarted)
     .on("drag", dragged)
-    .on("end", dragended));
+    .on("end", dragended))
+
+    
 
 let simulation = d3.forceSimulation()
     .nodes(data[1])
@@ -74,7 +77,8 @@ let simulation = d3.forceSimulation()
         linkpath
         // console.log(d.source)
         .attr("d", d => "M" + d.source.x + "," + d.source.y + " " + d.target.x + "," + d.target.y);
-    }); 
+    })
+    
     
 
     let linkpath = svg.append("g")
@@ -86,7 +90,8 @@ let simulation = d3.forceSimulation()
     .attr("fill", "none")
     .attr("stroke", "black");
 
-    function dragstarted(event, d) {
+
+function dragstarted(event, d) {
   if (!event.active) simulation.alphaTarget(0.3).restart();
   d.fx = d.x;
   d.fy = d.y;
@@ -110,6 +115,7 @@ d3.select("#group1").on("click", function() {
     .alphaTarget(0.3)
     .restart();
 })
+
 
 d3.select("#group2").on("click", function() {
     simulation
